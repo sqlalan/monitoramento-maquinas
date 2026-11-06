@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: monitoramento-maquinas
+  jackson:
+    serialization:
+      indent-output: true
+
+server:
+  # Usa a variavel PORT quando existir (ex.: Render, Railway); senao, 8080
+  port: ${PORT:8080}
+
+app:
+  nome: "Monitoramento de Máquinas - CloudTech Solutions"
+  # Preenchido automaticamente pelo Maven com a versao do pom.xml
+  versao: "@project.version@"
