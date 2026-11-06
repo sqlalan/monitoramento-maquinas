@@ -1,0 +1,434 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "Monitoramento de Máquinas - CloudTech",
+  "collectionId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+  "dateExported": "2026-11-06T00:54:18.361Z",
+  "version": "1.2",
+  "folders": [],
+  "requests": [
+    {
+      "_id": "cf706cb3-a505-461e-88a0-f3d6517ef564",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "01 - Página inicial",
+      "url": "http://localhost:8080/",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "76c3dafb-8520-49e6-87e0-161f86c51cda",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "02 - Status da aplicação (RF05)",
+      "url": "http://localhost:8080/status",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.status",
+          "action": "equal",
+          "value": "online"
+        }
+      ]
+    },
+    {
+      "_id": "a413a1ac-db59-428c-acdc-af9ddd9208e2",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "03 - Versão da aplicação",
+      "url": "http://localhost:8080/versao",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.versao",
+          "action": "equal",
+          "value": "1.0.0"
+        }
+      ]
+    },
+    {
+      "_id": "548ccc85-7eeb-4550-a9c4-d74c51c048e2",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "04 - Listar máquinas (RF03)",
+      "url": "http://localhost:8080/maquinas",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "cfcb8e3e-b09c-4294-ab1b-6b94d62b47e8",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "05 - Listar máquinas por status",
+      "url": "http://localhost:8080/maquinas?status=parada",
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "9e8e1eec-a712-417c-95e8-111db0cf8e1e",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "06 - Buscar máquina por id",
+      "url": "http://localhost:8080/maquinas/1",
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.nome",
+          "action": "equal",
+          "value": "Máquina CNC 01"
+        }
+      ]
+    },
+    {
+      "_id": "3af76bce-b092-4f3f-b414-e0223c412f2c",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "07 - Instruções de cadastro",
+      "url": "http://localhost:8080/maquinas/cadastro",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "e4aa3c4f-5c56-4e10-8ce4-668dd6bf91df",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "08 - Cadastrar máquina (RF01)",
+      "url": "http://localhost:8080/maquinas/cadastro",
+      "method": "POST",
+      "sortNum": 80000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"Torno CNC 04\",\n  \"tipo\": \"Torno\",\n  \"setor\": \"Usinagem\",\n  \"status\": \"em operação\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "998f1e95-6f0d-44eb-902b-38ee0f376909",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "09 - Cadastrar máquina inválida (400)",
+      "url": "http://localhost:8080/maquinas/cadastro",
+      "method": "POST",
+      "sortNum": 90000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"\",\n  \"tipo\": \"CNC\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "c813200f-2aa5-420a-8b41-73f2dd85d1c0",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "10 - Atualizar status da máquina",
+      "url": "http://localhost:8080/maquinas/3/status",
+      "method": "PATCH",
+      "sortNum": 100000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        },
+        {
+          "type": "json-query",
+          "custom": "json.status",
+          "action": "equal",
+          "value": "em operação"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"status\": \"em operação\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "10509662-1941-4228-9aab-ca54ec31665a",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "11 - Máquina inexistente (404)",
+      "url": "http://localhost:8080/maquinas/999",
+      "method": "GET",
+      "sortNum": 110000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ]
+    },
+    {
+      "_id": "b7339416-6f8c-49f5-b0a7-1785c29327a6",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "12 - Registrar produção (RF02)",
+      "url": "http://localhost:8080/producao",
+      "method": "POST",
+      "sortNum": 120000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "201"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"maquinaId\": 1,\n  \"consumoKw\": 12.5,\n  \"horarioAcionamento\": \"08:30\",\n  \"pecasProduzidas\": 150\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "1ff7f53e-47ca-4a8e-9777-1ce41fcaab04",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "13 - Registrar produção com horário inválido (400)",
+      "url": "http://localhost:8080/producao",
+      "method": "POST",
+      "sortNum": 130000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "400"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"maquinaId\": 1,\n  \"consumoKw\": 12.5,\n  \"horarioAcionamento\": \"8h30\",\n  \"pecasProduzidas\": 150\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "71477935-0928-4059-8631-cb4980b346e9",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "14 - Registrar produção para máquina inexistente (404)",
+      "url": "http://localhost:8080/producao",
+      "method": "POST",
+      "sortNum": 140000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "404"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"maquinaId\": 999,\n  \"consumoKw\": 10,\n  \"horarioAcionamento\": \"09:00\",\n  \"pecasProduzidas\": 10\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "42751f6b-5ab6-4cda-9c79-5213804e5eb9",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "15 - Consultar produção (RF04)",
+      "url": "http://localhost:8080/producao",
+      "method": "GET",
+      "sortNum": 150000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "d81872a8-6883-439d-9f22-f8ad99a339c9",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "16 - Consultar produção por máquina",
+      "url": "http://localhost:8080/producao?maquinaId=1",
+      "method": "GET",
+      "sortNum": 160000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    },
+    {
+      "_id": "9cc59f1b-cf9f-4e28-a1a1-447a11e0dd24",
+      "colId": "7d5e4419-d66d-4eae-a3c5-2db48238f5db",
+      "containerId": "",
+      "name": "17 - Histórico de produção e consumo",
+      "url": "http://localhost:8080/maquinas/1/historico",
+      "method": "GET",
+      "sortNum": 170000,
+      "created": "2026-11-06T00:54:18.361Z",
+      "modified": "2026-11-06T00:54:18.361Z",
+      "headers": [],
+      "tests": [
+        {
+          "type": "res-code",
+          "custom": "",
+          "action": "equal",
+          "value": "200"
+        }
+      ]
+    }
+  ]
+}
