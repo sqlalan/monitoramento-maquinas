@@ -1,0 +1,102 @@
+# Nome do workflow que aparecerá na aba "Actions" do GitHub
+name: Pipeline CI/CD - Monitoramento de Máquinas
+
+# Define os eventos que irão disparar este workflow
+on:
+  # Permite executar o workflow manualmente pela aba "Actions" do GitHub
+  workflow_dispatch:
+
+  # Executa o workflow quando um Pull Request for criado, atualizado ou reaberto
+  pull_request:
+
+  # Executa o workflow sempre que ocorrer um push para qualquer branch.
+  # Um merge também gera um push, portanto o workflow roda após o merge
+  push:
+
+# Define os trabalhos que serão executados pelo workflow
+jobs:
+
+  # ------------------------------------------------------------------
+  # Job 1: compila o projeto, executa os testes e gera o .jar
+  # ------------------------------------------------------------------
+  build-e-testes:
+    name: Build e testes (Maven)
+
+    # Sistema operacional da máquina virtual utilizada pelo GitHub Actions
+    runs-on: ubuntu-latest
+
+    # Lista de etapas que serão executadas em sequência
+    steps:
+
+      # Faz o checkout do repositório, ou seja, baixa o código
+      # do projeto para dentro da máquina virtual
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      # Instala e configura o Java 21 utilizando a distribuição Eclipse Temurin.
+      # A opção "cache: maven" guarda as dependências entre execuções
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      # Compila o código, executa todos os testes da pasta tests/
+      # e gera o arquivo target/monitoramento-maquinas.jar
+      - name: Compilar e executar testes
+        run: mvn -B verify
+
+      # Publica os relatórios dos testes como artefato (mesmo se algum teste falhar)
+      - name: Publicar relatórios dos testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-testes
+          path: target/surefire-reports/
+
+      # Publica o .jar gerado como artefato para download
+      - name: Publicar o .jar da aplicação
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoramento-maquinas-jar
+          path: target/monitoramento-maquinas.jar
+
+  # ------------------------------------------------------------------
+  # Job 2: gera a imagem Docker e faz um teste rápido (smoke test)
+  # Só roda se o job de build e testes terminar com sucesso
+  # ------------------------------------------------------------------
+  docker:
+    name: Imagem Docker e smoke test
+    needs: build-e-testes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      # Constrói a imagem usando o Dockerfile da raiz do repositório
+      - name: Construir imagem Docker
+        run: docker build -t monitoramento-maquinas:${{ github.sha }} .
+
+      # Sobe o container em segundo plano expondo a porta 8080
+      - name: Iniciar container
+        run: docker run -d --name app -p 8080:8080 monitoramento-maquinas:${{ github.sha }}
+
+      # Aguarda a aplicação subir e verifica os endpoints principais
+      - name: Testar endpoints no container
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8080/status > /dev/null; then break; fi
+            sleep 2
+          done
+          echo "== /status =="  && curl -fs http://localhost:8080/status
+          echo "== /versao =="  && curl -fs http://localhost:8080/versao
+          echo "== /maquinas ==" && curl -fs http://localhost:8080/maquinas
+          echo "== /producao ==" && curl -fs http://localhost:8080/producao
+          curl -fs http://localhost:8080/status | grep -q '"online"'
+
+      # Mostra os logs do container caso algo dê errado
+      - name: Logs do container
+        if: always()
+        run: docker logs app
